@@ -58,8 +58,8 @@ function Header() {
       </Navbar>
       <div>
         <Modal isOpen={modal} toggle={toggleModal}>
-          <ModalHeader toggle={toggleModal}>Contact</ModalHeader>
-          <ContactForm></ContactForm>
+          <ModalHeader className={styles.header}>Contact Form</ModalHeader>
+          <ContactForm />
         </Modal>
       </div>
     </div>

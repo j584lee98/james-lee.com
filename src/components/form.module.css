@@ -1,3 +1,27 @@
 .root {
   margin: 1rem;
 }
+
+.send {
+  text-align: center;
+}
+
+.header {
+  justify-content: center;
+  text-align: center;
+}
+
+.title {
+  text-align: center;
+  font-weight: bold;
+  padding-bottom: 0;
+}
+
+.body {
+  text-align: center;
+}
+
+.footer {
+  border-top: 0;
+  justify-content: center;
+}

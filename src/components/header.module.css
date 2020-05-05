@@ -6,3 +6,8 @@
 .contact {
   cursor: pointer;
 }
+
+.header {
+  justify-content: center;
+  text-align: center;
+}
