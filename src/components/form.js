@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import styles from "./form.module.css";
 
@@ -19,6 +20,13 @@ export default class ContactForm extends React.Component {
       email: this.state.email,
       message: this.state.message,
     };
+    axios.post("https://8rrwf7ige7.execute-api.ca-central-1.amazonaws.com/email", form)
+      .then(res => {
+        console.log('Email Sent Successfully!');
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   render() {
