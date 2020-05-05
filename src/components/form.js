@@ -11,6 +11,7 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
+import { AvForm, AvGroup, AvField } from "availity-reactstrap-validation";
 import styles from "./form.module.css";
 
 export default class ContactForm extends React.Component {
@@ -23,14 +24,16 @@ export default class ContactForm extends React.Component {
       modal: false,
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleValidSubmit = this.handleValidSubmit.bind(this);
+    this.handleInvalidSubmit = this.handleInvalidSubmit.bind(this);
     this.handleModal = this.handleModal.bind(this);
   }
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
+    console.log(event.target.value);
   }
 
-  handleSubmit() {
+  handleValidSubmit() {
     const form = {
       name: this.state.name,
       email: this.state.email,
@@ -50,6 +53,10 @@ export default class ContactForm extends React.Component {
       });
   }
 
+  handleInvalidSubmit() {
+    return;
+  }
+
   handleModal() {
     this.setState({ modal: false });
   }
@@ -57,45 +64,55 @@ export default class ContactForm extends React.Component {
   render() {
     return (
       <div>
-        <Form onSubmit={this.handleSubmit} className={styles.root}>
-          <FormGroup>
-            <Label for="name">Name</Label>
-            <Input
+        <AvForm onValidSubmit={this.handleValidSubmit} onInvalidSubmit={this.handleInvalidSubmit} className={styles.root}>
+          <AvGroup>
+            <AvField
               type="text"
               name="name"
               id="name"
+              label="Full Name"
               placeholder="Your name"
               onChange={this.handleChange}
+              required
             />
-          </FormGroup>
-          <FormGroup>
-            <Label for="email">Email</Label>
-            <Input
+          </AvGroup>
+          <AvGroup>
+            <AvField
               type="email"
               name="email"
               id="email"
+              label="Email Address"
               placeholder="Your email"
               onChange={this.handleChange}
+              required
             />
-          </FormGroup>
-          <FormGroup>
-            <Label for="message">Message</Label>
-            <Input
+          </AvGroup>
+          <AvGroup>
+            <AvField
               type="textarea"
               name="message"
               id="message"
+              label="Message"
               placeholder="Message"
               onChange={this.handleChange}
+              required
             />
-          </FormGroup>
+          </AvGroup>
           <div className={styles.send}>
             <Button onClick={this.handleSubmit}>Send</Button>
           </div>
-        </Form>
-        <Modal isOpen={this.state.modal} toggle={this.handleModal} className={styles.modal}>
+        </AvForm>
+        <Modal
+          isOpen={this.state.modal}
+          toggle={this.handleModal}
+          className={styles.modal}
+        >
           <ModalHeader className={styles.header}>Success</ModalHeader>
           <ModalBody className={styles.title}>Thank you!</ModalBody>
-          <ModalBody className={styles.body}>Your message has been received. I will get back to you with a response within 24 hours.</ModalBody>
+          <ModalBody className={styles.body}>
+            Your message has been received. I will get back to you with a
+            response within 24 hours.
+          </ModalBody>
           <ModalFooter className={styles.footer}>
             <Button onClick={this.handleModal}>Close</Button>
           </ModalFooter>
